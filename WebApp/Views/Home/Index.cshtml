@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col12">
+            <img src="static/images/coder.jpg" alt="Sorry de afbeelding kon niet worden geladen" class="img-fluid w-100">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 align-self-start">
+            <div class="display-1">I'm Meindert</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <h1>And im a aspiring programmer</h1>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            <img src="static/images/cc.jpg" alt="sorry mijn profiel foto kan op een of andere manier niet geladen worden..." class="img-thumbnail    ">
+        </div>
+        <div class="col-md-6">
+            <p class="p-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium alias amet animi dignissimos earum excepturi facilis illum, labore magnam modi natus necessitatibus nemo nisi, nulla numquam quasi veritatis! Ab aperiam consequatur culpa cumque deleniti dolor dolorum error expedita fuga fugiat id inventore iste, iusto minus nam necessitatibus non praesentium quaerat quasi quia quidem similique, sit soluta temporibus ullam vel veritatis voluptatum. Ab aperiam, consequatur, debitis enim facilis hic labore laborum modi odio pariatur, porro quos sequi tempore. Doloremque esse explicabo incidunt necessitatibus nobis, rem repudiandae tempora voluptates! Ad cumque dicta, error exercitationem magni, perspiciatis quibusdam rem sapiente temporibus veritatis voluptatum.</p>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="h1 text-center">Evaringen</div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-4">
+            <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">c#</a>
+                <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">javascript</a>
+                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">SQL</a>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="d-flex align-content-center">
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, autem, beatae deserunt distinctio eos error iste libero maxime quia quibusdam, rem sint velit voluptatem! Ab accusantium eum in iure minima natus optio qui tempore. Amet deserunt hic illo, impedit iusto mollitia nesciunt non officia provident quaerat, ratione recusandae rem voluptatem.</div>
+                    <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">...</div>
+                    <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="h1">Mijn Werk</div>
+    </div>
+    <div class="row">
+        @for (int i = 0; i < 4; i++)
+        {
+            <div class="col-12 col-sm-6 d-flex justify-content-center">
+                <div class="card m-3">
+                    <img class="card-img-top" src="static/images/wallhaven-2eroxm.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <button type="button" class="btn btn-dark">Github <i class="fa fa-github" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-12">
+            <div class="h1">Oefen projecten</div>
+        </div>
+    </div>
+    
+    <nav>
+    	    <ul class="pagination pg-red">
+    
+    	        <!--Numbers-->
+    	        <li class="page-item"><a class="page-link">1</a></li>
+    	        <li class="page-item"><a class="page-link">2</a></li>
+    	        <li class="page-item"><a class="page-link">3</a></li>
+    	        <li class="page-item"><a class="page-link">4</a></li>
+    
+    	    </ul>
+    	</nav>
+    
+    @for (int i = 0; i < 20; i++)
+    {
+        <div class="row">
+            <div class="card bg-success card text-white m-1 p-1">
+                <h5 class="card-title">Project Title</h5>
+                <div class="card-text">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci alias autem doloribus eligendi est explicabo nesciunt officiis sapiente veniam voluptate! Animi at beatae consectetur cumque, cupiditate, ducimus eius molestias neque odit quibusdam totam ut? Aperiam autem beatae consectetur culpa ducimus, earum minus necessitatibus nobis obcaecati, officia officiis, perspiciatis sapiente. Mollitia?
+                </div>
+                <div class="card-body">
+                    <button type="button" class="btn btn-dark">Github <i class="fa fa-github" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
