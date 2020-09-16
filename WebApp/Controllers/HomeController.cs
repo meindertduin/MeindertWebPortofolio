@@ -16,20 +16,15 @@ namespace WebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly AppDbContext _ctx;
-
+        private int viewPerPage = 10;
         public HomeController(ILogger<HomeController> logger, AppDbContext ctx)
         {
             _logger = logger;
             _ctx = ctx;
         }
 
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, int index)
         {
-
-            ViewData["NameSortParam"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["DateSortParam"] = sortOrder == "date" ? "date_desc" : "date";
-            ViewData["FinishedSortParam"] = sortOrder == "finished" ? "finished_desc" : "finished";
-
             var projects = _ctx.Projects.Where(x => x.Deleted == false);
 
             switch (sortOrder)
@@ -43,20 +38,21 @@ namespace WebApp.Controllers
                 case "date_desc":
                     projects = projects.OrderByDescending(x => x.TimeAdded);
                     break;
-                case "finished_desc":
-                    projects = projects.OrderByDescending(x => x.Finished).ThenBy(x => x.Title);
-                    break;
-                case "finished":
-                    projects = projects.OrderBy(x => x.Finished).ThenBy(x => x.Title);
-                    break;
-                default:
+                case "name":
                     projects = projects.OrderBy(x => x.Title);
                     break;
+                default:
+                    projects = projects.OrderByDescending(x => x.TimeAdded);
+                    break;
+                    
             }
-
-            var orderedProjects = await projects.AsNoTracking().ToListAsync();
+            
+            double pagesCount = Math.Ceiling((double) projects.Count() / (double) viewPerPage);
+            var orderedProjects = await projects.Skip(index != null? viewPerPage * index: 0).Take(viewPerPage).AsNoTracking().ToListAsync();
             
             ViewBag.Projects = orderedProjects;
+            ViewBag.PagesCount = pagesCount;
+            ViewBag.SortParam = sortOrder;
             return View(orderedProjects);
         }
 

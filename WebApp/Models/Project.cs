@@ -13,8 +13,6 @@ namespace WebApp.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public bool Deleted { get; set; }
-        public bool Finished { get; set; }
-        
         public DateTime TimeAdded { get; set; }
     }
 }
