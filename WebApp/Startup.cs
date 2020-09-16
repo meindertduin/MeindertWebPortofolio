@@ -29,7 +29,10 @@ namespace WebApp
             
             services.AddDbContext<AppDbContext>(builder =>
             {
-                builder.UseSqlServer(Configuration.GetConnectionString("AppContext"));
+                builder.UseSqlServer(Configuration.GetConnectionString("AppContext"), b =>
+                {
+                    b.MigrationsAssembly("WebApp");
+                });
             });
             
             

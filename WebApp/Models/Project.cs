@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApp.Models
 {
@@ -9,9 +10,11 @@ namespace WebApp.Models
         [MaxLength(300)]
         public string GithubLink { get; set; }
         [MaxLength(50)]
-        public string Name { get; set; }
+        public string Title { get; set; }
         public string Description { get; set; }
         public bool Deleted { get; set; }
         public bool Finished { get; set; }
+        
+        public DateTime TimeAdded { get; set; }
     }
 }

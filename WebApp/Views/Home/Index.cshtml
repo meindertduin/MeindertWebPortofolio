@@ -1,4 +1,6 @@
-﻿
+﻿@using System.Globalization
+@model List<Project>
+
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -79,32 +81,72 @@
         </div>
     </div>
     
-    <nav>
-    	    <ul class="pagination pg-red">
     
-    	        <!--Numbers-->
-    	        <li class="page-item"><a class="page-link">1</a></li>
-    	        <li class="page-item"><a class="page-link">2</a></li>
-    	        <li class="page-item"><a class="page-link">3</a></li>
-    	        <li class="page-item"><a class="page-link">4</a></li>
-    
-    	    </ul>
-    	</nav>
-    
-    @for (int i = 0; i < 20; i++)
-    {
-        <div class="row">
-            <div class="card bg-success card text-white m-1 p-1">
-                <h5 class="card-title">Project Title</h5>
-                <div class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci alias autem doloribus eligendi est explicabo nesciunt officiis sapiente veniam voluptate! Animi at beatae consectetur cumque, cupiditate, ducimus eius molestias neque odit quibusdam totam ut? Aperiam autem beatae consectetur culpa ducimus, earum minus necessitatibus nobis obcaecati, officia officiis, perspiciatis sapiente. Mollitia?
-                </div>
-                <div class="card-body">
-                    <button type="button" class="btn btn-dark">Github <i class="fa fa-github" aria-hidden="true"></i></button>
-                </div>
+    <div class="row">
+        <div class="col-2">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sorteer bij
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" asp-action="Index" asp-route-sortOrder="" onclick="setScrollPos()">Titel</a>
+                <a class="dropdown-item" asp-action="Index" asp-route-sortOrder="name_desc" onclick="setScrollPos()">Titel aflopend</a>
+                <a class="dropdown-item" asp-action="Index" asp-route-sortOrder="date" onclick="setScrollPos()">Datum toegevoegd</a>
+                <a class="dropdown-item" asp-action="Index" asp-route-sortOrder="date_desc" onclick="setScrollPos()">Datum toegevoegd aflopend</a>
+                <a class="dropdown-item" asp-action="Index" asp-route-sortOrder="finished_desc" onclick="setScrollPos()">afgerond</a>
+                <a class="dropdown-item" asp-action="Index" asp-route-sortOrder="finished" onclick="setScrollPos()">niet afgerond</a>
+            </div>
+            
+        </div>
+        
+        <div class="col-2">
+            <div class="dropdown show">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Vorige</a></li>
+                        @for (int x = 0; x < ViewBag.Projects.Count; x++)
+                        {
+                            <li class="page-item"><a class="page-link" href="#">@(x + 1)</a></li>
+                        }
+                        <li class="page-item"><a class="page-link" href="#">Volgende</a></li>
+
+                    </ul>
+                </nav>
             </div>
         </div>
-    }
+    </div>
+   
+    <div id="accordion">
+        @foreach (var project in ViewBag.Projects)
+            {
+                <div class="card @(project.Finished? "bg-success": "bg-primary") text-white m-1">
+                    <div class="card-header" id="@("heading" + project.Id)">
+                      <h5 class="mb-0">
+                        <button class="btn text-white" data-toggle="collapse" data-target="@("#collapse" + project.Id)" aria-expanded="true" aria-controls="@("collapse" + project.Id)">
+                            @project.Title: @project.TimeAdded.ToString("Y", CultureInfo.CreateSpecificCulture("nl-NL"))
+                        </button>
+                      </h5>
+                    </div>
+                
+                    <div id="@("collapse" + project.Id)" class="collapse bg-white text-black-50" aria-labelledby="@("heading" + project.Id)" data-parent="#accordion">
+                        <div class="card-body">
+                            <div>@project.Description</div>
+                            <a href="@project.GithubLink">@project.GithubLink</a>
+                        </div>
+                    </div>
+                  </div>
+            }
+    </div>    
+  
 </div>
 
 
+<script lang="js">    
+    window.onload = function(){
+        if(sessionStorage.getItem('scrollpos')){
+            window.scrollTo(window.scrollX, parseInt(sessionStorage.getItem('scrollpos')));
+        }
+    }
+    function setScrollPos(){
+        sessionStorage.setItem('scrollpos', window.scrollY.toString());
+    }
+</script>
