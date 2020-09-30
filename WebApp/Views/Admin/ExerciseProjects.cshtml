@@ -1,0 +1,90 @@
+﻿@using System.Globalization
+@model ProjectForm;
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="container-fluid" id="index-top">
+    <div class="row text- justify-content-center align-self-center">
+        <div class="col mt-5 text-center">
+            <div class="h1 mt-5">Exercise Page</div>
+        </div>
+    </div>
+    <div class="row justify-content-center align-self-center">
+        <div class="card" style="width: 80%">
+            <div class="card-body">
+                <div class="card-title">Voeg een oefen project toe</div>
+                <form asp-action="Index">
+                    <div class="form-group">
+                        <label asp-for="Title" for="projectTitleInput">Project Titel</label>
+                        <input asp-for="Title" type="email" class="form-control" id="projectTitleInput" placeholder="Voeg een titel toe">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" for="projectDescriptionInput">Project Beschrijving</label>
+                        <textarea asp-for="Description" class="form-control" id="projectDescriptionInput" placeholder="Voeg een beschrijving toe" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="GithubLink" for="githubLinkInput">GithubLink</label>
+                        <input asp-for="GithubLink" type="email" class="form-control" id="githubLinkInput" aria-describedby="emailHelp" placeholder="Voeg een Github link toe">
+                    </div>
+                    <div class="row justify-content-center">
+                        <button type="submit" class="btn btn-primary">Toevoegen</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4 col-md-2">
+            <div class="dropdown show">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        @for (int x = 0; x < ViewBag.PagesCount; x++)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" asp-action="ExerciseProjects"  asp-route-index="@x" >@(x + 1)</a>
+                            </li>    
+                        }
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div id="accordion">
+        @foreach (var project in ViewBag.ExerciseProjects)
+        {
+            <div class="card text-white m-1" id="small-proj">
+                <div class="card-header" id="@("heading" + project.Id)">
+                    <h5 class="mb-0">
+                        <div class="row">
+                            <div class="col-10 justify-content-center">
+                                <button class="btn text-white" data-toggle="collapse" data-target="@("#collapse" + project.Id)" aria-expanded="true" aria-controls="@("collapse" + project.Id)">
+                                    @project.Title: @project.TimeAdded.ToString("f", CultureInfo.CreateSpecificCulture("nl-NL"))
+                                </button>
+                            </div>
+                            <div class="col-2">
+                                <form asp-action="DeleteExerciseProject" asp-route-id="@project.Id">
+                                    <input type="submit" value="Delete" class="btn btn-primary"/>
+                                </form>
+                            </div>
+                        </div>
+                    </h5>
+                </div>
+                                
+                <div id="@("collapse" + project.Id)" class="collapse bg-white text-black-50" aria-labelledby="@("heading" + project.Id)" data-parent="#accordion">
+                    <div class="card-body">
+                        <div>@project.Description</div>
+                        <a href="@project.GithubLink">@project.GithubLink</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    #small-proj{
+        background-color: cornflowerblue;
+    }
+</style>

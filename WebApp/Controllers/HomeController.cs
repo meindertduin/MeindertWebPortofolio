@@ -47,12 +47,16 @@ namespace WebApp.Controllers
                     
             }
             
-            double pagesCount = Math.Ceiling((double) projects.Count() / (double) viewPerPage);
-            var orderedProjects = await projects.Skip(index != null? viewPerPage * index: 0).Take(viewPerPage).AsNoTracking().ToListAsync();
+            double pagesCount = Math.Ceiling(projects.Count() / (double) viewPerPage);
+            var orderedProjects = await projects.Skip(index != null? viewPerPage * index: 0)
+                .Take(viewPerPage)
+                .AsNoTracking()
+                .ToListAsync();
             
             ViewBag.Projects = orderedProjects;
             ViewBag.PagesCount = pagesCount;
             ViewBag.SortParam = sortOrder;
+            
             return View(orderedProjects);
         }
 
