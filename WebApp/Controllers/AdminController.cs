@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Jpeg;
+using SixLabors.ImageSharp.Processing;
 using WebApp.Data;
 using WebApp.Models;
 
@@ -14,11 +19,16 @@ namespace WebApp.Controllers
     public class AdminController : Controller
     {
         private readonly AppDbContext _ctx;
+        private readonly IWebHostEnvironment _env;
         private const int ITEMS_PER_PAGE = 10;
 
-        public AdminController(AppDbContext ctx)
+        private const int BIG_PROJECT_IMAGE_WIDTH = 1280;
+        private const int BIG_PROJECT_IMAGE_HEIGHT = 720;
+        
+        public AdminController(AppDbContext ctx, IWebHostEnvironment env)
         {
             _ctx = ctx;
+            _env = env;
         }
         
         public IActionResult Index()
@@ -121,20 +131,35 @@ namespace WebApp.Controllers
         }
         
         [HttpPost, ActionName("CreateBigProject")]
-        public IActionResult CreateBigProject(BigProjectForm projectForm)
+        public async Task<IActionResult> CreateBigProject(BigProjectForm projectForm)
         {
             List<BigProjectImage> bigProjectImages = new List<BigProjectImage>();
             
             foreach (var screenShot in projectForm.ScreenShots)
             {
-                using (var reader = new BinaryReader(screenShot.OpenReadStream()))
+                using (var input = screenShot.OpenReadStream())
                 {
-                    var bytes = reader.ReadBytes((int) screenShot.Length);
+                    var tempSavePath = Path.Combine(_env.WebRootPath, Path.GetRandomFileName() + ".jpg");
                     
-                    bigProjectImages.Add(new BigProjectImage
+                    using (var image = Image.Load(input))
                     {
-                        Image = bytes,
-                    });
+                        image.Mutate(x => 
+                            x.Resize(new Size(BIG_PROJECT_IMAGE_WIDTH, BIG_PROJECT_IMAGE_HEIGHT)));
+                            
+                        await image.SaveAsync(tempSavePath, new JpegEncoder());
+                    }
+                        
+                    using (var reader = new BinaryReader(System.IO.File.OpenRead(tempSavePath)))
+                    {
+                        var bytes = reader.ReadBytes((int) screenShot.Length);
+                    
+                        bigProjectImages.Add(new BigProjectImage
+                        {
+                            Image = bytes,
+                        });
+                    }
+                    
+                    System.IO.File.Delete(tempSavePath);
                 }
             }
             
