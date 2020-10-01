@@ -44,5 +44,35 @@
         </div>
     </div>
     
+    <div class="row justify-content-center mt-5">
+        @foreach (BigProjectViewModel project in @ViewBag.BigProjects)
+        {
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="row justify-content-center">
+                        @for (int i = 0; i < project.Images.Count; i++)
+                        {
+                            <div class="col-md-4">
+                                <img class="img-fluid d-block w-100 h-75" 
+                                     src="@Url.Action("GetBigProjectImage", "Home", new {id = project.Images[i].Id})"
+                                     alt="Sorry de afbeelding kon niet worden geladen">
+                            </div>
+                        }
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title h4">@project.Title</div>
+                        <div class="card-subtitle h6">Features: @(string.Join(',', project.Features))</div>
+                        <p class="card-text">@project.Description</p>
+                        <div class="row justify-content-end">
+                            <a asp-action="EditBigProject" asp-route-id="@project.Id" ><button class="btn btn-warning m-2">Edit</button></a>
+                            <form asp-action="DeleteBigProject" asp-route-id="@project.Id">
+                                <input type="submit" value="Delete" class="btn btn-warning m-2"/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
     
 </div>

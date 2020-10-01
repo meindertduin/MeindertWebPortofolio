@@ -1,0 +1,98 @@
+﻿@model BigProjectEditForm
+
+@{
+    Layout = "_AdminLayout";
+    BigProjectViewModel project = ViewBag.BigProject;
+}
+
+<div class="container-fluid">
+    <div class="row text- justify-content-center align-self-center">
+        <div class="col mt-5 text-center">
+            <div class="h1 mt-5">Big Project Edit Page</div>
+        </div>
+    </div>
+    <div class="row justify-content-center align-self-center">
+        <div class="card" style="width: 80%">
+            <div class="row justify-content-center">
+                @foreach (var image in project.Images)
+                {
+                    <div class="col-md-4 col-sm-6">
+                        <div class="image-area m-3">
+                            <img class="img-fluid d-block w-100 h-75" 
+                                 src="@Url.Action("GetBigProjectImage", "Home", new {id = image.Id})"
+                                 alt="Sorry de afbeelding kon niet worden geladen">
+                            <form asp-action="DeleteBigProjectImage" asp-route-id="@image.Id" 
+                                  asp-route-returnURl="@Context.Request.Path@Context.Request.QueryString">
+                                <input type="submit" class="remove-image" style="display: inline;" value="&#215;">
+                            </form>
+                        </div>
+                    </div>
+                }
+            </div>
+            
+            <div class="card-body">
+                <div class="card-title">Voeg een groot project toe</div>
+                <form asp-action="EditBigProject" enctype="multipart/form-data">
+                    <input asp-for="Id" type="hidden">
+                    <div class="form-group">
+                        <label asp-for="Title" for="projectTitleInput">Project Titel</label>
+                        <input asp-for="Title" type="text" class="form-control" id="projectTitleInput" placeholder="Voeg een titel toe">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" for="projectDescriptionInput">Project Beschrijving</label>
+                        <textarea asp-for="Description" class="form-control" id="projectDescriptionInput" 
+                            placeholder="Voeg een beschrijving toe" rows="3"
+                        >
+                        </textarea>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Features" for="projectFeaturesInput">Project Features (onderschijd met: ,)</label>
+                        <input asp-for="Features" type="text" class="form-control" id="projectFeaturesInput" placeholder="Voeg een paar Features toe">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="GithubLink" for="githubLinkInput">GithubLink</label>
+                        <input asp-for="GithubLink" type="url" class="form-control" id="githubLinkInput" placeholder="Voeg een Github link toe">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ScreenShots" for="imageInput">Screenshots</label>
+                        <input asp-for="ScreenShots" multiple="multiple" type="file" class="form-control" id="imageInput" placeholder="Voeg een screenshot toe">
+                    </div>
+
+                    <div class="row justify-content-center">
+                        <button type="submit" class="btn btn-primary">Veranderingen Opslaan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .image-area {   
+      background: #333;
+    }
+    .remove-image {
+        display: none;
+        position: absolute;
+        top: 2px;
+        right: 20px;
+        border-radius: 10em;
+        padding: 2px 6px 3px;
+        text-decoration: none;
+        font: 700 21px/20px sans-serif;
+        background: #555;
+        border: 3px solid #fff;
+        color: #FFF;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 2px 4px rgba(0,0,0,0.3);
+        text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        -webkit-transition: background 0.5s;
+        transition: background 0.5s;
+    }
+    .remove-image:hover {
+     background: #E54E4E;
+          padding: 3px 7px 5px;
+    }
+    .remove-image:active {
+     background: #E54E4E;
+    }
+</style>

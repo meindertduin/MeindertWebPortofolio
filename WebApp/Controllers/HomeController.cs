@@ -74,7 +74,6 @@ namespace WebApp.Controllers
             }
             
             ViewBag.BigProjects = bigProjectsViewModels;
-            
             ViewBag.Projects = orderedProjects;
             ViewBag.PagesCount = pagesCount;
             ViewBag.SortParam = sortOrder;

@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebApp.Data;
+using WebApp.Domain;
 
 namespace WebApp
 {
@@ -61,7 +62,8 @@ namespace WebApp
                     config.Cookie.Name = "meindertcookie";
                     config.LoginPath = "/account/login";
                 });
-            
+
+            services.AddTransient<IImageProcessingService, ImageProcessingService>();
             
             services.AddControllersWithViews();
             
