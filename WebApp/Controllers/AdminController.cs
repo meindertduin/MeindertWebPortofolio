@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApp.Data;
 using WebApp.Models;
 
@@ -81,12 +82,44 @@ namespace WebApp.Controllers
         [HttpGet]
         public IActionResult BigProjects()
         {
-            var bigProjects = _ctx.BigProjects.Where(x => x.Deleted == false).ToList();
-            ViewBag.BigProjects = bigProjects;
+            var bigProjects = _ctx.BigProjects
+                .Where(x => x.Deleted == false)
+                .Include(x => x.Images)
+                .ToList();
+
+            var bigProjectsViewModels = new List<BigProjectViewModel>();
+
+            foreach (var bigProject in bigProjects)
+            {
+                bigProjectsViewModels.Add(new BigProjectViewModel
+                {
+                    Id = bigProject.Id,
+                    Title = bigProject.Title,
+                    Description = bigProject.Description,
+                    Features = bigProject.Features,
+                    GithubLink = bigProject.GithubLink,
+                    Images = bigProject.Images.ToList(),
+                });
+            }
+
+
+            ViewBag.BigProjects = bigProjectsViewModels;
             
             return View();
         }
 
+        [HttpGet]
+        public IActionResult GetBigProjectImage(int id)
+        {
+            var image = _ctx.BigProjectImages.FirstOrDefault(x => x.Id == id);
+            if (image != null)
+            {
+                return File(image.Image, "image/png");
+            }
+
+            return BadRequest();
+        }
+        
         [HttpPost, ActionName("CreateBigProject")]
         public IActionResult CreateBigProject(BigProjectForm projectForm)
         {

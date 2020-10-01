@@ -53,11 +53,45 @@ namespace WebApp.Controllers
                 .AsNoTracking()
                 .ToListAsync();
             
+            var bigProjects = _ctx.BigProjects
+                .Where(x => x.Deleted == false)
+                .Include(x => x.Images)
+                .ToList();
+
+            var bigProjectsViewModels = new List<BigProjectViewModel>();
+
+            foreach (var bigProject in bigProjects)
+            {
+                bigProjectsViewModels.Add(new BigProjectViewModel
+                {
+                    Id = bigProject.Id,
+                    Title = bigProject.Title,
+                    Description = bigProject.Description,
+                    Features = bigProject.Features,
+                    GithubLink = bigProject.GithubLink,
+                    Images = bigProject.Images.ToList(),
+                });
+            }
+            
+            ViewBag.BigProjects = bigProjectsViewModels;
+            
             ViewBag.Projects = orderedProjects;
             ViewBag.PagesCount = pagesCount;
             ViewBag.SortParam = sortOrder;
             
             return View(orderedProjects);
+        }
+        
+        [HttpGet]
+        public IActionResult GetBigProjectImage(int id)
+        {
+            var image = _ctx.BigProjectImages.FirstOrDefault(x => x.Id == id);
+            if (image != null)
+            {
+                return File(image.Image, "image/png");
+            }
+
+            return BadRequest();
         }
 
         [Authorize]
