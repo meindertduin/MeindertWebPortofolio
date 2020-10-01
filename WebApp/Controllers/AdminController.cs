@@ -81,6 +81,9 @@ namespace WebApp.Controllers
         [HttpGet]
         public IActionResult BigProjects()
         {
+            var bigProjects = _ctx.BigProjects.Where(x => x.Deleted == false).ToList();
+            ViewBag.BigProjects = bigProjects;
+            
             return View();
         }
 

@@ -19,6 +19,8 @@ namespace WebApp.Models
         [MaxLength(300)]
         public string GithubLink { get; set; }
 
+        public bool Deleted { get; set; }
+
         public ICollection<BigProjectImage> Images { get; set; }
     }
 }
