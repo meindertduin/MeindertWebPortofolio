@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -40,12 +42,12 @@ namespace WebApp.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult ExerciseProjects(ProjectForm projectForm)
+        [HttpPost, ActionName("CreateExerciseProject")]
+        public IActionResult Create(ProjectForm projectForm)
         {
             if (ModelState.IsValid == false)
             {
-                return View();
+                return RedirectToAction("ExerciseProjects");
             }
             
             Project newProject = new Project
@@ -74,7 +76,45 @@ namespace WebApp.Controllers
             }
             
             return RedirectToAction("ExerciseProjects");
+        }
 
+        [HttpGet]
+        public IActionResult BigProjects()
+        {
+            return View();
+        }
+
+        [HttpPost, ActionName("CreateBigProject")]
+        public IActionResult CreateBigProject(BigProjectForm projectForm)
+        {
+            List<BigProjectImage> bigProjectImages = new List<BigProjectImage>();
+            
+            foreach (var screenShot in projectForm.ScreenShots)
+            {
+                using (var reader = new BinaryReader(screenShot.OpenReadStream()))
+                {
+                    var bytes = reader.ReadBytes((int) screenShot.Length);
+                    
+                    bigProjectImages.Add(new BigProjectImage
+                    {
+                        Image = bytes,
+                    });
+                }
+            }
+            
+            var bigProject = new BigProject
+            {
+                Title = projectForm.Title,
+                Description = projectForm.Description,
+                GithubLink = projectForm.GithubLink,
+                Features = projectForm.Features.Split(',', StringSplitOptions.RemoveEmptyEntries).ToArray(),
+                Images = bigProjectImages,
+            };
+
+            _ctx.BigProjects.Add(bigProject);
+            _ctx.SaveChanges();
+            
+            return RedirectToAction("BigProjects");
         }
     }
 }
