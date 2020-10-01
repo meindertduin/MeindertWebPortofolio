@@ -9,7 +9,7 @@
 
 <div class="container-fluid" id="index-top">
     <div class="row text-center">
-        <div class="col-8 align-self-start mt-5">
+        <div class="col-8 align-self-start" style="margin-top: 50px">
             <div class="display-1 font-weight-bold text-white">Ik ben Meindert</div>
         </div>
     </div>
@@ -19,27 +19,25 @@
         </div>
     </div>
     <div class="row">
-        <div class="col12">
-            <img src="static/images/coder.jpg" alt="Sorry de afbeelding kon niet worden geladen" class="img-fluid w-100" height="600">
+        <div class="full-width-image">
+            <img src="static/images/laptop_met_code.png" alt="Sorry de afbeelding kon niet worden geladen" class="img-fluid">
         </div>
     </div>
 </div>
 
 <div class="container-fluid mt-0" id="index-profile">
-    <hr>
     <div class="container">
         <div class="display-2 text-start font-weight-bold">Ikke in het kort</div>
-        <div class="row align-content-center text-center">
+        <div class="row align-content-center text-start">
             <div class="col-md-6 align-self-center">
                 <img src="static/images/cc.jpg" alt="sorry mijn profiel foto kan op een of andere manier niet geladen worden..." class="img-thumbnail    ">
             </div>
-            <div class="col-md-6 align-self-center">
+            <div class="col-md-6">
                 <p class="p-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium alias amet animi dignissimos earum excepturi facilis illum, labore magnam modi natus necessitatibus nemo nisi, nulla numquam quasi veritatis! Ab aperiam consequatur culpa cumque deleniti dolor dolorum error expedita fuga fugiat id inventore iste, iusto minus nam necessitatibus non praesentium quaerat quasi quia quidem similique, sit soluta temporibus ullam vel veritatis voluptatum. Ab aperiam, consequatur, debitis enim facilis hic labore laborum modi odio pariatur, porro quos sequi tempore. Doloremque esse explicabo incidunt necessitatibus nobis, rem repudiandae tempora voluptates! Ad cumque dicta, error exercitationem magni, perspiciatis quibusdam rem sapiente temporibus veritatis voluptatum.</p>
             </div>
         </div>
     </div>
     <div class="container">
-        <hr>
         <div class="row">
             <div class="h1 font-weight-bold text-center">Evaringen</div>
         </div>
@@ -60,16 +58,15 @@
         </div>
     </div>
     <div class="container">
-        <hr>
         <div class="row">
-            <div class="h1 font-weight-bold">Mijn Projecten</div>
-            <hr>
+            <div class="h1 font-weight-bold">Projecten</div>
         </div>
-        <div class="row justify-content-center">
+        <hr>            
+                    <div class="row justify-content-center">
             @foreach (BigProjectViewModel project in @ViewBag.BigProjects)
             {
                 <div class="col-md-6">
-                    <div class="card">
+                    <div class="card m-2">
                         <div id="@("cardCarousel" + project.Id)" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
@@ -108,7 +105,6 @@
         
     </div>
     <div class="container">
-        <hr>
         <div class="row">
             <div class="col-12">
                 <div class="h1 font-weight-bold">Oefen projecten</div>
@@ -128,7 +124,7 @@
         </div>
         
         <div class="row">
-            <div class="col-4 col-md-2">
+            <div class="col-6 col-md-9">
                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Sorteer bij
                 </a>
@@ -140,7 +136,7 @@
                 </div>
             </div>
                 
-            <div class="col-4 col-md-2">
+            <div class="col-6 col-md-3 justify-content-end">
                 <div class="dropdown show">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
@@ -165,7 +161,7 @@
                     <div class="card-header" id="@("heading" + project.Id)">
                         <h5 class="mb-0">
                             <button class="btn text-white" data-toggle="collapse" data-target="@("#collapse" + project.Id)" aria-expanded="true" aria-controls="@("collapse" + project.Id)">
-                                @project.Title: @project.TimeAdded.ToString("f", CultureInfo.CreateSpecificCulture("nl-NL"))
+                                @project.Title: @project.TimeAdded.ToString("D", CultureInfo.CreateSpecificCulture("nl-NL"))
                             </button>
                         </h5>
                     </div>
@@ -206,6 +202,21 @@
 }
 #small-proj{
     background-color: #05B2DC;
+}
+
+.full-width-image {
+   width: 100vw;
+   position: relative;
+   left: 50%;  
+   margin-left: -50vw;
+}
+
+.full-width-image img {
+  width: 100%;
+}
+
+hr{
+    border-top: 2px solid black
 }
 
 </style>
