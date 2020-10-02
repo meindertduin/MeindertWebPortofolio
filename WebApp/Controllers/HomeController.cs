@@ -48,7 +48,8 @@ namespace WebApp.Controllers
             }
             
             double pagesCount = Math.Ceiling(projects.Count() / (double) viewPerPage);
-            var orderedProjects = await projects.Skip(index != null? viewPerPage * index: 0)
+            var orderedProjects = await projects
+                .Skip(viewPerPage * index)
                 .Take(viewPerPage)
                 .AsNoTracking()
                 .ToListAsync();

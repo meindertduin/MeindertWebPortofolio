@@ -147,7 +147,7 @@ namespace WebApp.Controllers
             
             if (projectForm.ScreenShots != null)
             {
-                var bigProjectImages = await GetImages(projectForm.ScreenShots);
+                var bigProjectImages = await ConvertImages(projectForm.ScreenShots);
                 bigProject.Images = bigProjectImages;
             }
             
@@ -217,7 +217,7 @@ namespace WebApp.Controllers
                     
                     if (projectForm.ScreenShots != null)
                     {
-                        var bigProjectImages = await GetImages(projectForm.ScreenShots);
+                        var bigProjectImages = await ConvertImages(projectForm.ScreenShots);
                         bigProject.Images = bigProjectImages;
                         
                         foreach (var image in bigProjectImages)
@@ -243,7 +243,7 @@ namespace WebApp.Controllers
             return Redirect(returnUrl);
         }
 
-        private async Task<List<BigProjectImage>> GetImages(List<IFormFile> images)
+        private async Task<List<BigProjectImage>> ConvertImages(List<IFormFile> images)
         {
             List<BigProjectImage> bigProjectImages = new List<BigProjectImage>();
 
