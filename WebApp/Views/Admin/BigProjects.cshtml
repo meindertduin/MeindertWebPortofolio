@@ -48,11 +48,11 @@
         @foreach (BigProjectViewModel project in @ViewBag.BigProjects)
         {
             <div class="col-md-6">
-                <div class="card">
+                <div class="card m-4 border-0 shadow">
                     <div class="row justify-content-center">
                         @for (int i = 0; i < project.Images.Count; i++)
                         {
-                            <div class="col-md-4">
+                            <div class="col-md-4 mt-1 mx-1">
                                 <img class="img-fluid d-block w-100 h-75" 
                                      src="@Url.Action("GetBigProjectImage", "Home", new {id = project.Images[i].Id})"
                                      alt="Sorry de afbeelding kon niet worden geladen">
