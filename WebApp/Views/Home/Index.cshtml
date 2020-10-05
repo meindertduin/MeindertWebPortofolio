@@ -6,22 +6,11 @@
 }
 
 
-
-<div class="container-fluid" id="index-top">
-    <div class="row text-center">
-        <div class="col-8 align-self-start" style="margin-top: 50px">
-            <div class="display-1 font-weight-bold text-white">Ik ben Meindert</div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col text-center font-weight-bold text-white">
-            <h1>En ik ben graag opzoek naar een baan / bijbaan in ICT</h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="full-width-image">
-            <img src="static/images/laptop_met_code.png" alt="Sorry de afbeelding kon niet worden geladen" class="img-fluid">
-        </div>
+<div class="top-image">
+    <img class="top-bg-image" src="static/images/laptop_met_code.png" alt="Sorry de afbeelding kon niet worden geladen">
+    <div class="top-bg-text p-md-4 p-2">
+        <h1>Ik ben Meindert</h1>
+        <p>En ik ben opzoek naar een baan in ICT</p>
     </div>
 </div>
 
@@ -93,8 +82,8 @@
             @foreach (BigProjectViewModel project in @ViewBag.BigProjects)
             {    
                 <div class="col-md-6 my-3">
-                    <div class="col" style="display: flex; justify-content: center">
-                        <div class="text px-md-4 px-3 shadow" style="width: 95%; border-top-left-radius: 20px; border-top-right-radius: 20px; height: 20px; padding-bottom: 30px; padding-top: 5px">
+                    <div class="col project-top-col">
+                        <div class="text px-md-4 px-3 shadow project-top-section">
                             <div class="card-title h5 mb-2 font-weight-bold">Project</div>
                         </div>
                     </div>
@@ -123,19 +112,20 @@
                     </div>
 
                     <div class="row justify-content-center">
-                        <div class="col" style="display: flex; justify-content: center">
-                            <div class="text p-md-4 p-3 shadow" style="width: 95%; min-height: 200px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px;">
+                        <div class="col project-bottom-col">
+                            <div class="text p-md-4 p-3 shadow project-bottom-section">
                                 <div class="card-title h2">@project.Title</div>
-                                <div style="display: flex; flex-flow: row wrap;">
+                                <div class="project-features-list">
                                     @foreach (var feature in project.Features)
                                     {
-                                        <div style="margin: 3px; border-color: grey; border-style: solid; padding: 5px; background-color: #201a26; color: white">
+                                        <div class="project-feature">
                                             @feature.ToUpper(CultureInfo.InvariantCulture)
                                         </div>
                                     }
 
                                 </div>
-                                <p class="card-text">@project.Description</p>
+                                <div class="h4">Beschrijving</div>
+                                <p class="project-description">@project.Description</p>
                                 <a href="@project.GithubLink" target="_blank">
                                     <button type="button" asp- class="btn btn-dark">Github <i class="fa fa-github" aria-hidden="true"></i></button>
                                 </a>
@@ -167,8 +157,8 @@
             
         </div>
         
-        <div class="row">
-            <div class="col-6 col-md-9">
+        <div class="row exercise-projects-menu">
+            <div class="m-2">
                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Sorteer bij
                 </a>
@@ -180,7 +170,7 @@
                 </div>
             </div>
                 
-            <div class="col-6 col-md-3 justify-content-end">
+            <div class="m-2">
                 <div class="dropdown show">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
@@ -198,7 +188,7 @@
                 </div>
             </div>
         </div>
-        <div id="accordion">
+        <div id="accordion" class="exercise-project-container">
             @foreach (var project in ViewBag.Projects)
             {
                 <div class="card text-white m-1" id="small-proj">

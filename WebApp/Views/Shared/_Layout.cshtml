@@ -63,24 +63,124 @@
 
 </html>
 
-<style>
+<style> 
+    .top-image{
+        margin-top: 60px;
+        display: block;
+        position:relative;
+        text-align: center;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .top-bg-image{
+        filter: blur(3px);
+        width: 100%;
+        height: auto;
+    }
+    
+    
+    .top-bg-text{
+        position: absolute;
+        border: white 4px solid;
+        display: block;
+        top: 40%;
+        left: 50%;
+        -o-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: white;
+    }
+
     #nav-bar{
     background-color: #156064;
     }
     
     .footer {
-             background: #156064;
-             padding: 3em;
-             position: absolute;
-             left: 0;
-             right: 0;
-             bottom: 0;
-        }
+        background: #156064;
+        padding: 3em;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
         
-        body{
-            ....
-            padding-bottom:300px;
-        }
+    body{
+        padding-bottom:300px;
+    }
+    
+    .project-top-col{
+        display: flex; 
+        justify-content: center
+    }
+    
+    .project-top-section{
+        width: 95%; 
+        border-top-left-radius: 20px; 
+        border-top-right-radius: 20px; 
+        height: 20px; 
+        padding-bottom: 30px; 
+        padding-top: 5px
+    }
+    
+    .project-bottom-col{
+        display: flex; 
+        justify-content: center
+    }
+    .project-bottom-section{
+        width: 95%; 
+        min-height: 200px; 
+        border-bottom-right-radius: 20px; 
+        border-bottom-left-radius: 20px;
+    }
+    
+    .project-features-list{
+        display: flex; 
+        flex-flow: row wrap;
+    }
+    .project-feature{
+        margin: 3px; 
+        border-color: grey; 
+        border-style: solid; 
+        padding: 5px; 
+        background-color: #201a26; 
+        color: white
+    }
+    
+    .project-description{
+        overflow: auto; 
+        max-height: 200px;
+        padding: 2px;
+    }
+    
+    .project-description::-webkit-scrollbar {
+        width: 12px;
+    }
+    
+    .project-description::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(200,200,200,1);
+        background-color: gray;
+        border-radius: 10px;
+    }
+    
+    .project-description::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        height: 2px;
+        background-color:#fff;
+        -webkit-box-shadow: inset 0 0 6px rgba(90,90,90,0.7);
+    }
+    
+    .exercise-project-container{
+        width: 90%;
+    }
+    
+    .exercise-projects-menu{
+        display: flex;
+    }
+            
     
 </style>
 
