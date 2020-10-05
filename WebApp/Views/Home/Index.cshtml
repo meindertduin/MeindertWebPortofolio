@@ -148,6 +148,12 @@
                                 <a href="@project.GithubLink" target="_blank">
                                     <button type="button" asp- class="btn btn-dark">Github <i class="fa fa-github" aria-hidden="true"></i></button>
                                 </a>
+                                @if (string.IsNullOrEmpty(project.DemoLink) == false)
+                                {
+                                    <a href="@project.DemoLink" target="_blank">
+                                        <button type="button" asp- class="btn btn-dark">Demo <i class="fa fa-desktop" aria-hidden="true"></i></button>
+                                    </a>
+                                }
                             </div>
                         </div>
                     </div>

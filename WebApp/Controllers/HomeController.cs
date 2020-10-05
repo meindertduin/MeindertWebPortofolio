@@ -69,6 +69,7 @@ namespace WebApp.Controllers
                     Title = bigProject.Title,
                     Description = bigProject.Description,
                     Features = bigProject.Features,
+                    DemoLink = bigProject.DemoLink,
                     GithubLink = bigProject.GithubLink,
                     Images = bigProject.Images.ToList(),
                 });

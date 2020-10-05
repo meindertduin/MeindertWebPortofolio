@@ -141,6 +141,7 @@ namespace WebApp.Controllers
             {
                 Title = projectForm.Title,
                 Description = projectForm.Description,
+                DemoLink = projectForm.DemoLink,
                 GithubLink = projectForm.GithubLink,
                 Features = projectForm.Features.Split(',', StringSplitOptions.RemoveEmptyEntries).ToArray(),
             };
@@ -212,6 +213,7 @@ namespace WebApp.Controllers
                     bigProject.Description = projectForm.Description;
                     bigProject.Title = projectForm.Title;
                     bigProject.GithubLink = projectForm.GithubLink;
+                    bigProject.DemoLink = projectForm.DemoLink;
                     bigProject.Features =
                         projectForm.Features.Split(',', StringSplitOptions.RemoveEmptyEntries).ToArray();
                     

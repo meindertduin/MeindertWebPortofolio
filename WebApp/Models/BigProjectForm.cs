@@ -11,5 +11,6 @@ namespace WebApp.Models
         public string Description { get; set; }
         public List<IFormFile> ScreenShots { get; set; }
         public string GithubLink { get; set; }
+        public string DemoLink { get; set; }
     }
 }

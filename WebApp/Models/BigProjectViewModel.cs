@@ -14,7 +14,7 @@ namespace WebApp.Models
         public string Description { get; set; }
         
         public string[] Features { get; set; }
-        
+        public string DemoLink { get; set; }
         public string GithubLink { get; set; }
 
         public List<BigProjectImage> Images { get; set; }
