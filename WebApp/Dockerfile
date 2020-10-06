@@ -1,16 +1,19 @@
-﻿FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+﻿  #build phase
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 as build
+
 WORKDIR /app
 
-# Copy csproj and restore as distinct layers
-COPY *.csproj ./
+COPY *csproj .
 RUN dotnet restore
 
-# Copy everything else and build
-COPY . ./
-RUN dotnet publish -c Release -o out
+COPY . .
+RUN dotnet publish -c Release -o pub
 
-# Build runtime image
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
+#Run phase
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+
 WORKDIR /app
-COPY --from=build-env /app/out .
-ENTRYPOINT ["dotnet", "WebApp.dll"]
+EXPOSE 80
+COPY --from=build /app/pub .
+
+ENTRYPOINT [ "dotnet","WebApp.dll" ]

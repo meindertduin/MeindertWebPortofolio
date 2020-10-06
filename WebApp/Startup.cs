@@ -32,17 +32,19 @@ namespace WebApp
         {
             var assembly = typeof(Startup).Assembly.GetName().Name;
 
-            var server = Configuration["DBServer"] ?? "localhost";
-            var port = Configuration["DBPort"] ?? "14333";
-            var user = Configuration["DBUser"] ?? "SA";
-            var password = Configuration["DBPassword"] ?? "Password2020";
-            var database = Configuration["DBDatabase"] ?? "Portofolio";
+            var server = Configuration["ServerName"];
+            var port = "1449";
+            var database = Configuration["Database"];
+            var user = Configuration["UserName"];
+            var password = Configuration["Password"];
 
-            var connection = $"Server={server},14330;Initial Catalog=Portofolio;User ID =SA;Password=Password2020";
+            var connection = $"Server=mssqlserver,14330;Initial Catalog=Portofolio;User ID =SA;Password=Password2020;TrustServerCertificate=true";
             
             services.AddDbContext<AppDbContext>(builder =>
             {
-                builder.UseSqlServer(connection, b =>
+                builder.UseSqlServer(
+                    $"Server={DockerHostMachineIpAddress},{port};Initial Catalog={database};User ID={user};Password={password};TrustServerCertificate=true",
+                    b =>
                 {
                     b.MigrationsAssembly("WebApp");
                 });

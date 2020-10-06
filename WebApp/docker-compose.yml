@@ -1,19 +1,21 @@
 ﻿version: '3.8'
-
 services:
-  mssqlserver:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+  portofoliosqlserver:
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
     environment:
       ACCEPT_EULA: "Y"
-      SA_PASSWORD: "Password2020"
-      MSSQL_PID: "Express"
+      MSSQL_SA_PASSWORD : "Passw@rd2020"
+      MSSQL_PID: Express
     ports:
-    - "1433:1433"
-  portofolioapp:
+      - "1449:1433"
+  portofoliowebapp:
     build: .
-    environment:
-      DBServer: "ms-sql-server"
     depends_on:
-      - mssqlserver
+      - portofoliosqlserver
+    environment:
+      ServerName: "portofoliosqlserver"
+      Database: "Portofolio"
+      UserName: "SA"
+      Password: "Passw@rd2020"
     ports:
-    - "8000:80"
+      - "80:80"
