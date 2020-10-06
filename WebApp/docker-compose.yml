@@ -1,0 +1,19 @@
+﻿version: '3.8'
+
+services:
+  mssqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Password2020"
+      MSSQL_PID: "Express"
+    ports:
+    - "1433:1433"
+  portofolioapp:
+    build: .
+    environment:
+      DBServer: "ms-sql-server"
+    depends_on:
+      - mssqlserver
+    ports:
+    - "8000:80"

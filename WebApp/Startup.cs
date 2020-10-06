@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -24,14 +25,24 @@ namespace WebApp
         }
 
         public IConfiguration Configuration { get; }
+        
+        public static string DockerHostMachineIpAddress => Dns.GetHostAddresses(new Uri("http://docker.for.win.localhost").Host)[0].ToString();
 
         public void ConfigureServices(IServiceCollection services)
         {
             var assembly = typeof(Startup).Assembly.GetName().Name;
+
+            var server = Configuration["DBServer"] ?? "localhost";
+            var port = Configuration["DBPort"] ?? "14333";
+            var user = Configuration["DBUser"] ?? "SA";
+            var password = Configuration["DBPassword"] ?? "Password2020";
+            var database = Configuration["DBDatabase"] ?? "Portofolio";
+
+            var connection = $"Server={server},14330;Initial Catalog=Portofolio;User ID =SA;Password=Password2020";
             
             services.AddDbContext<AppDbContext>(builder =>
             {
-                builder.UseSqlServer(Configuration.GetConnectionString("AppContext"), b =>
+                builder.UseSqlServer(connection, b =>
                 {
                     b.MigrationsAssembly("WebApp");
                 });
@@ -83,7 +94,7 @@ namespace WebApp
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            
             app.UseRouting();
 
             app.UseAuthentication();

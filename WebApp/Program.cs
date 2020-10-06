@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using WebApp.Data;
 
 namespace WebApp
 {
@@ -19,12 +21,27 @@ namespace WebApp
 
             using (var scope = host.Services.CreateScope())
             {
-                var userManager = scope.ServiceProvider.GetService<UserManager<IdentityUser>>();
+                var services = scope.ServiceProvider;
 
+                try
+                {
+                    var context = services.GetRequiredService<AppDbContext>();
+                    if (context.Database.GetPendingMigrations().Any())
+                    {
+                        context.Database.Migrate();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "An error occurred seeding the DB.");
+                }
+
+                
+                var userManager = scope.ServiceProvider.GetService<UserManager<IdentityUser>>();
                 var user = new IdentityUser("bob"){ Email = "meindertvanduin99@gmail.com"};
 
                 userManager.CreateAsync(user, "password").GetAwaiter().GetResult();
-
             }
             
             host.Run();
