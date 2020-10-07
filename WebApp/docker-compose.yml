@@ -13,9 +13,9 @@ services:
     depends_on:
       - portofoliosqlserver
     environment:
-      ServerName: "portofoliosqlserver"
-      Database: "Portofolio"
-      UserName: ${SQL_SERVER_USER_NAME}
-      Password: ${SQL_PASSWORD}
+      - SERVER_NAME=portofoliosqlserver
+      - DATA_BASE=Portofolio
+      - USER_NAME=${SQL_SERVER_USER_NAME}
+      - PASSWORD=${SQL_PASSWORD}
     ports:
       - "80:80"
