@@ -7,7 +7,7 @@ services:
       MSSQL_SA_PASSWORD : "Passw@rd2020"
       MSSQL_PID: Express
     ports:
-      - "1449:1433"
+      - "1433:1433"
   portofoliowebapp:
     build: .
     depends_on:
