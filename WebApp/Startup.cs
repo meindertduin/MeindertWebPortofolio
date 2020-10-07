@@ -43,7 +43,7 @@ namespace WebApp
             services.AddDbContext<AppDbContext>(builder =>
             {
                 builder.UseSqlServer(
-                    $"Server={DockerHostMachineIpAddress},{port};Initial Catalog={database};User ID={user};Password={password};TrustServerCertificate=true",
+                    $"Server={server},{port};Initial Catalog={database};User ID={user};Password={password};TrustServerCertificate=true",
                     b =>
                 {
                     b.MigrationsAssembly("WebApp");
