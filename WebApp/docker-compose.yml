@@ -4,7 +4,7 @@ services:
     image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
     environment:
       ACCEPT_EULA: "Y"
-      MSSQL_SA_PASSWORD : "Passw@rd2020"
+      MSSQL_SA_PASSWORD : {SQL_PASSWORD:Passw@rd2020}
       MSSQL_PID: Express
     ports:
       - "1433:1433"
@@ -15,7 +15,7 @@ services:
     environment:
       ServerName: "portofoliosqlserver"
       Database: "Portofolio"
-      UserName: "SA"
-      Password: "Passw@rd2020"
+      UserName: {SQL_SERVER_USER_NAME:SA}
+      Password: {SQL_PASSWORD:Passw@rd2020}
     ports:
       - "80:80"

@@ -37,11 +37,21 @@ namespace WebApp
                     logger.LogError(ex, "An error occurred seeding the DB.");
                 }
 
+                var env = scope.ServiceProvider.GetRequiredService<IWebHostEnvironment>();
+
+                string adminName = "admin";
+                string adminPassword = "password";
+                
+                if (env.IsProduction())
+                {
+                    adminName = Environment.GetEnvironmentVariable("ADMIN_NAME");
+                    adminPassword = Environment.GetEnvironmentVariable("ADMIN_PASSWORD");
+                }
                 
                 var userManager = scope.ServiceProvider.GetService<UserManager<IdentityUser>>();
-                var user = new IdentityUser("bob"){ Email = "meindertvanduin99@gmail.com"};
+                var user = new IdentityUser(adminName){ Email = "meindertvanduin99@gmail.com"};
 
-                userManager.CreateAsync(user, "password").GetAwaiter().GetResult();
+                userManager.CreateAsync(user, adminPassword).GetAwaiter().GetResult();
             }
             
             host.Run();
