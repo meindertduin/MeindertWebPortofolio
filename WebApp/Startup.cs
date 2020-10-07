@@ -33,13 +33,19 @@ namespace WebApp
             var assembly = typeof(Startup).Assembly.GetName().Name;
 
             var server = Configuration["ServerName"];
-            var port = "1449";
+            var port = "1433";
             var database = Configuration["Database"];
             var user = Configuration["UserName"];
             var password = Configuration["Password"];
 
             var connection = $"Server=mssqlserver,14330;Initial Catalog=Portofolio;User ID =SA;Password=Password2020;TrustServerCertificate=true";
             
+            Console.WriteLine("server is: ", server);
+            Console.WriteLine("port is: ", port);
+            Console.WriteLine("database is: ", database);
+            Console.WriteLine("user is: ", user);
+            Console.WriteLine("password is: ", password);
+
             services.AddDbContext<AppDbContext>(builder =>
             {
                 builder.UseSqlServer(
