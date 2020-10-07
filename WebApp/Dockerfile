@@ -1,5 +1,5 @@
 ﻿  #build phase
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 as build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-focal as build
 
 WORKDIR /app
 
@@ -10,7 +10,7 @@ COPY . .
 RUN dotnet publish -c Release -o pub
 
 #Run phase
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-focal
 
 WORKDIR /app
 EXPOSE 80
