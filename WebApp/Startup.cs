@@ -36,11 +36,11 @@ namespace WebApp
             
             if (_env.IsProduction())
             {
-                var server = Configuration["SERVER_NAME"];
+                var server = Configuration["ServerName"];
                 var port = "1433";
-                var database = Configuration["DATA_BASE"];
-                var user = Configuration["USER_NAME"];
-                var password = Configuration["PASSWORD"];
+                var database = Configuration["Database"];
+                var user = Configuration["UserName"];
+                var password = Configuration["Password"];
                 
                 conn = $"Server={server},{port};Initial Catalog={database};User ID={user};Password={password};";
             }
