@@ -23,6 +23,7 @@ namespace WebApp
             {
                 var services = scope.ServiceProvider;
                 var env = scope.ServiceProvider.GetRequiredService<IWebHostEnvironment>();
+                var configuration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
                 
                 try
                 {
@@ -44,7 +45,7 @@ namespace WebApp
 
                 if (env.IsProduction())
                 {
-                    adminPassword = Environment.GetEnvironmentVariable("ADMIN_PASSWORD")?? "password";
+                    adminPassword = configuration["AdminPassword"] ?? "password";
                 }
                 else
                 {

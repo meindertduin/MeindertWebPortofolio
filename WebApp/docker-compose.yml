@@ -17,5 +17,6 @@ services:
       Database: "Portofolio"
       UserName: "SA"
       Password: "Passw@rd2020"
+      AdminPassword: "${ADMIN_PASSWORD}"
     ports:
       - "80:80"
