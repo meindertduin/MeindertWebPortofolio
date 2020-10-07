@@ -19,8 +19,11 @@ namespace WebApp
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IWebHostEnvironment _env;
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
+            _env = env;
             Configuration = configuration;
         }
 
@@ -32,25 +35,24 @@ namespace WebApp
         {
             var assembly = typeof(Startup).Assembly.GetName().Name;
 
-            var server = Configuration["ServerName"];
-            var port = "1433";
-            var database = Configuration["Database"];
-            var user = Configuration["UserName"];
-            var password = Configuration["Password"];
-
-            var connection = $"Server=mssqlserver,14330;Initial Catalog=Portofolio;User ID =SA;Password=Password2020;TrustServerCertificate=true";
             
-            Console.WriteLine("server is: ", server);
-            Console.WriteLine("port is: ", port);
-            Console.WriteLine("database is: ", database);
-            Console.WriteLine("user is: ", user);
-            Console.WriteLine("password is: ", password);
 
+            var conn = Configuration.GetConnectionString("AppContext");
+
+            if (_env.IsProduction())
+            {
+                var server = Configuration["ServerName"];
+                var port = "1433";
+                var database = Configuration["Database"];
+                var user = Configuration["UserName"];
+                var password = Configuration["Password"];
+
+                conn = $"Server={server},{port};Initial Catalog={database};User ID={user};Password={password};TrustServerCertificate=true";
+            }
+            
             services.AddDbContext<AppDbContext>(builder =>
             {
-                builder.UseSqlServer(
-                    $"Server={server},{port};Initial Catalog={database};User ID={user};Password={password};TrustServerCertificate=true",
-                    b =>
+                builder.UseSqlServer(conn, b =>
                 {
                     b.MigrationsAssembly("WebApp");
                 });

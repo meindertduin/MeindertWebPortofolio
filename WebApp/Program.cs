@@ -22,7 +22,8 @@ namespace WebApp
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-
+                var env = scope.ServiceProvider.GetRequiredService<IWebHostEnvironment>();
+                
                 try
                 {
                     var context = services.GetRequiredService<AppDbContext>();
@@ -37,11 +38,22 @@ namespace WebApp
                     logger.LogError(ex, "An error occurred seeding the DB.");
                 }
 
+                string adminName = "admin";
+                string adminPassword;
+
+                if (env.IsProduction())
+                {
+                    adminPassword = Environment.GetEnvironmentVariable("ADMIN_PASSWORD")?? "password";
+                }
+                else
+                {
+                    adminPassword = "password";
+                }
                 
                 var userManager = scope.ServiceProvider.GetService<UserManager<IdentityUser>>();
-                var user = new IdentityUser("bob"){ Email = "meindertvanduin99@gmail.com"};
+                var user = new IdentityUser(adminName);
 
-                userManager.CreateAsync(user, "password").GetAwaiter().GetResult();
+                userManager.CreateAsync(user, adminPassword).GetAwaiter().GetResult();
             }
             
             host.Run();
