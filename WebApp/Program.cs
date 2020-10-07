@@ -38,6 +38,7 @@ namespace WebApp
                     logger.LogError(ex, "An error occurred seeding the DB.");
                 }
 
+
                 string adminName = "admin";
                 string adminPassword;
 
@@ -52,7 +53,7 @@ namespace WebApp
                 
                 var userManager = scope.ServiceProvider.GetService<UserManager<IdentityUser>>();
                 var user = new IdentityUser(adminName);
-
+                
                 userManager.CreateAsync(user, adminPassword).GetAwaiter().GetResult();
             }
             

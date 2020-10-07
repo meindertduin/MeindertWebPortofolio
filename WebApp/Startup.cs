@@ -29,14 +29,9 @@ namespace WebApp
 
         public IConfiguration Configuration { get; }
         
-        public static string DockerHostMachineIpAddress => Dns.GetHostAddresses(new Uri("http://docker.for.win.localhost").Host)[0].ToString();
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var assembly = typeof(Startup).Assembly.GetName().Name;
-
-            
-
             var conn = Configuration.GetConnectionString("AppContext");
 
             if (_env.IsProduction())
