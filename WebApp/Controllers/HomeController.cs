@@ -94,12 +94,6 @@ namespace WebApp.Controllers
 
             return BadRequest();
         }
-
-        [Authorize]
-        public IActionResult Secret()
-        {
-            return View();
-        }
         
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

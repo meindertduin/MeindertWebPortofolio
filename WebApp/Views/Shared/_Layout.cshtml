@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>@ViewData["Title"] - WebApp</title>
+    <title>@ViewData["Title"] - Meindert Web-Portofolio</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/css/site.css"/>
 </head>
@@ -81,6 +81,10 @@
         width: 100%;
         overflow: hidden;
     }
+    
+    body{
+        background-color: #c5c6c7;
+    }
 
     .top-bg-image{
         filter: blur(3px);
@@ -105,11 +109,11 @@
     }
 
     #nav-bar{
-    background-color: #156064;
+        background-color: #0b0c10;
     }
     
     .footer {
-        background: #156064;
+        background: #0b0c10;
         padding: 3em;
         position: absolute;
         left: 0;
@@ -128,7 +132,7 @@
         border-top-right-radius: 20px; 
         height: 20px; 
         padding-bottom: 30px; 
-        padding-top: 5px
+        padding-top: 5px;
     }
     
     .project-bottom-col{
@@ -166,24 +170,106 @@
     }
     
     .project-description::-webkit-scrollbar-track {
-        -webkit-box-shadow: inset 0 0 6px rgba(200,200,200,1);
-        background-color: gray;
+        background-color: #1f2833;
         border-radius: 10px;
     }
     
     .project-description::-webkit-scrollbar-thumb {
         border-radius: 10px;
         height: 2px;
-        background-color:#fff;
-        -webkit-box-shadow: inset 0 0 6px rgba(90,90,90,0.7);
+        background-color:#0b0c10;
     }
     
     .exercise-project-container{
         width: 90%;
     }
     
+    .exercise-project-menu-item > a{
+        background-color: #45a29E;
+        border: 1px solid #0b0c10;
+    }
+    
+    .exercise-project-menu-item > a:hover{
+        background-color: #6c757d;
+        border: 1px solid #0b0c10;
+    }
+    
+    .exercise-project-menu-item > a:active{
+        background-color: #6c757d;
+    }
+    
+    .exercise-page-link{
+        background-color: #45a29E;
+        position: relative;
+        display: block;
+        padding: .5rem .75rem;
+        margin-left: -1px;
+        line-height: 1.25;
+        color: #ffffff;
+        border: 1px solid #0b0c10;
+    }
+    
+    .exercise-page-link:hover{
+        background-color: #6c757d;
+        text-decoration: none;
+        color: #ffffff;
+    }
+    
     .exercise-projects-menu{
         display: flex;
+    }
+    
+    .contact-card{
+        background-color: #45a29E;;
+    }
+    
+    #index-profile{
+        background-color: #c5c6c7;
+        padding-bottom: 2em;
+    }
+    #small-proj{
+        background-color: #05B2DC;
+    }
+    
+    .big-project-part{
+        background-color: #1f2833;
+        color: white;
+    }
+    
+    .exercise-card > .card-header{
+        background-color: #1f2833;
+    }
+    
+    
+    #contact .card:hover i,#contact .card:hover h4{
+    	color: #0b0c10;
+    }
+    
+    .full-width-image {
+       width: 100vw;
+       position: relative;
+       left: 50%;  
+       margin-left: -50vw;
+    }
+    
+    .full-width-image img {
+      width: 100%;
+    }
+    
+    hr{
+        border-top: 2px solid black
+    }
+    
+    .section-title{
+        margin-top: 1em;
+    }
+    
+    .section-subtitle{
+        max-width: 500px;
+    }
+    
+    .section-text{
+        margin-top: 2em;
     }
             
     

@@ -2,7 +2,7 @@
 @model List<Project>
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
 
@@ -18,25 +18,21 @@
    
 <div class="container-fluid mt-0" id="index-profile">
     <div class="container">
-        <div class="display-2 mt-3 text-start font-weight-bold">Ikke in het kort</div>
-        <hr>
-        
+        <div class="display-4 my-2 section-title">Meindert van Duin</div>
+
         <div class="row">
             <div class="col-xl-10 offset-xl-1">
                 <div class="row">
                     <div class="col-lg-6">
-                        <div>
-                            <div class="display-4 my-2">Meindert van Duin</div>
-                            <h4 class="text-muted mt-3">Hobby programmeur, die er nu echte werk van wilt maken.</h4>
-                        </div>
-                        <div>
+                        <div class="h4 text-muted mt-3 section-subtitle">Hobby programmeur, die er nu echte werk van wilt maken.</div>
+                        <div class="section-text">
                             <p>Ik ben graag opzoek naar een baan waarbij ik mijn voet in de wereld van fullstack development kan zetten.
                                 Zo programmeer ik al een tijdje in Asp .Net en javascript framework Vue en is het gehele proces van het maken van een website wat mij erg interesseert</p>
-                            <p>Mijn affinieteiten liggen vooral bij het technische aspect van het maken van een website, 
+                            <p>Mijn affinieteiten liggen vooral bij het technische aspect van het maken van een website,
                                 maar ik hoop ook graag verder te kunnen ontwikkelen om te kunnen genieten van alle aspecten van fullstack development. </p>
                             <p>Daarom hoop ik graag aan de slag te kunnen in een team waarbij ontwikkeling en resultaat prioriteit zijn.</p>
                         </div>
-                        
+
                     </div>
                     <div class="col-lg-6">
                         <img src="static/images/stock-profile.jpg" class="img-fluid" alt="5">
@@ -52,11 +48,13 @@
         </div>
         <hr>
         <div class="row">
-            <div class="col-sm-6 col-md-3">
+            <div class="col-sm-6 col-md-4">
                 <div class="h3">
                     Frontend
                 </div>
                 <ul>
+                    <li>C#</li>
+                    <li>Asp .Net Core</li>
                     <li>Javascript (es5, es6)</li>
                     <li>Typescript</li>
                     <li>Vue js</li>
@@ -65,13 +63,7 @@
                     <li>css</li>
                 </ul>
             </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="h3">
-                    Backend
-                </div>
-                <ul>
-                    <li>Asp .Net Core</li>
-                </ul>
+            <div class="col-sm-6 col-md-4">
                 <div class="h3">
                     Database
                 </div>
@@ -80,14 +72,12 @@
                     <li>Entity Framework Core</li>
                     <li>Dapper</li>
                 </ul>
-                
-            </div>
-            <div class="col-sm-6 col-md-3">
                 <div class="h3">
                     Overig
                 </div>
                 <ul>
                     <li>Git</li>
+                    <li>Docker</li>
                 </ul>
             </div>
         </div>
@@ -102,12 +92,12 @@
             {    
                 <div class="col-md-6 my-3">
                     <div class="col project-top-col">
-                        <div class="text px-md-4 px-3 shadow project-top-section">
+                        <div class="text px-md-4 px-3 shadow project-top-section big-project-part">
                             <div class="card-title h5 mb-2 font-weight-bold">Project</div>
                         </div>
                     </div>
                     
-                    <div id="@("cardCarousel" + project.Id)" class="carousel slide" data-ride="carousel">
+                    <div id="@("cardCarousel" + project.Id)" class="carousel slide big-project-part" data-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <img class="img-fluid d-block w-100 h-75" src="@Url.Action("GetBigProjectImage", new {id = project.Images[0].Id})" alt="Sorry de afbeelding kon niet worden geladen">
@@ -132,7 +122,7 @@
 
                     <div class="row justify-content-center">
                         <div class="col project-bottom-col">
-                            <div class="text p-md-4 p-3 shadow project-bottom-section">
+                            <div class="text p-md-4 p-3 shadow project-bottom-section big-project-part">
                                 <div class="card-title h2">@project.Title</div>
                                 <div class="project-features-list">
                                     @foreach (var feature in project.Features)
@@ -183,7 +173,7 @@
         </div>
         
         <div class="row exercise-projects-menu">
-            <div class="m-2">
+            <div class="m-2 exercise-project-menu-item">
                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Sorteer bij
                 </a>
@@ -195,18 +185,18 @@
                 </div>
             </div>
                 
-            <div class="m-2">
+            <div class="m-2 exercise-project-menu-item">
                 <div class="dropdown show">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Vorige</a></li>
+                            <li class="page-item"><a class="exercise-page-link" href="#">Vorige</a></li>
                             @for (int x = 0; x < ViewBag.PagesCount; x++)
                             {
                                 <li class="page-item">
-                                    <a class="page-link" asp-action="Index" asp-route-sortOrder="@ViewBag.SortParam" asp-route-index="@x" >@(x + 1)</a>
+                                    <a class="exercise-page-link" asp-action="Index" asp-route-sortOrder="@ViewBag.SortParam" asp-route-index="@x" >@(x + 1)</a>
                                 </li>    
                             }
-                            <li class="page-item"><a class="page-link" href="#">Volgende</a></li>
+                            <li class="page-item"><a class="exercise-page-link" href="#">Volgende</a></li>
         
                         </ul>
                     </nav>
@@ -216,7 +206,7 @@
         <div id="accordion" class="exercise-project-container">
             @foreach (var project in ViewBag.Projects)
             {
-                <div class="card text-white m-1" id="small-proj">
+                <div class="card exercise-card text-white m-1" id="small-proj">
                     <div class="card-header" id="@("heading" + project.Id)">
                         <h5 class="mb-0">
                             <button class="btn text-white" data-toggle="collapse" data-target="@("#collapse" + project.Id)" aria-expanded="true" aria-controls="@("collapse" + project.Id)">
@@ -289,38 +279,6 @@
 </script>
 
 <style>
-.contact-card{
-    background-color: #FFFBFC;;
-}
 
-#index-top{
-    background-color: #201a26;
-}
-#index-profile{
-    background-color: #FFFBFC;
-    padding-bottom: 2em;
-}
-#small-proj{
-    background-color: #05B2DC;
-}
-
-#contact .card:hover i,#contact .card:hover h4{
-	color: #87d37c;
-}
-
-.full-width-image {
-   width: 100vw;
-   position: relative;
-   left: 50%;  
-   margin-left: -50vw;
-}
-
-.full-width-image img {
-  width: 100%;
-}
-
-hr{
-    border-top: 2px solid black
-}
 
 </style>
