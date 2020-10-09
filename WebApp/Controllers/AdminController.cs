@@ -18,6 +18,7 @@ using WebApp.Models;
 namespace WebApp.Controllers
 {
     [Authorize]
+    [AutoValidateAntiforgeryToken]
     public class AdminController : Controller
     {
         private readonly AppDbContext _ctx;

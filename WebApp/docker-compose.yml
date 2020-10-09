@@ -2,6 +2,7 @@
 services:
   portofoliosqlserver:
     image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    restart: always
     environment:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD : "Passw@rd2020"
@@ -10,6 +11,7 @@ services:
       - "1433:1433"
   portofoliowebapp:
     build: .
+    restart: always
     depends_on:
       - portofoliosqlserver
     environment:

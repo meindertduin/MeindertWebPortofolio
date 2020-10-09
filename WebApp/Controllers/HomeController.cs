@@ -12,6 +12,7 @@ using WebApp.Models;
 
 namespace WebApp.Controllers
 {
+    [AutoValidateAntiforgeryToken]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

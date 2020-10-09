@@ -6,6 +6,7 @@ using WebApp.Models;
 
 namespace WebApp.Controllers
 {
+    [AutoValidateAntiforgeryToken]
     public class AccountController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
