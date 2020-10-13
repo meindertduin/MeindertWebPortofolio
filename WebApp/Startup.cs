@@ -32,18 +32,7 @@ namespace WebApp
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var conn = Configuration.GetConnectionString("AppContext");
-
-            if (_env.IsProduction())
-            {
-                var server = Configuration["ServerName"];
-                var port = "1433";
-                var database = Configuration["Database"];
-                var user = Configuration["UserName"];
-                var password = Configuration["Password"];
-
-                conn = $"Server={server},{port};Initial Catalog={database};User ID={user};Password={password};TrustServerCertificate=true";
-            }
+            var conn = Configuration["Projects:ConnectionString"]?? Configuration.GetConnectionString("AppContext");
             
             services.AddDbContext<AppDbContext>(builder =>
             {

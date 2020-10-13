@@ -4,9 +4,9 @@ namespace WebApp.Models
 {
     public class LoginModel
     {
-        [Required(ErrorMessage = "Username is required")]
+        [Required(ErrorMessage = "Gebruikersnaam is vereist")]
         public string UserName { get; set; }
-        [Required(ErrorMessage = "Password is required")]
+        [Required(ErrorMessage = "Wachtwoord is vereist")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

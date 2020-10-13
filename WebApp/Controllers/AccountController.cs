@@ -33,24 +33,30 @@ namespace WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel loginModel)
         {
-            var user = await _userManager.FindByNameAsync(loginModel.UserName);
 
-            if (user != null)
+
+            if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(user, loginModel.Password, false, false);
+                var user = await _userManager.FindByNameAsync(loginModel.UserName);
 
-                if (result.Succeeded)
+                if (user != null)
                 {
-                    if (string.IsNullOrEmpty(loginModel.ReturnUrl))
-                    {
-                        return Redirect("/");
-                    }
+                    var result = await _signInManager.PasswordSignInAsync(user, loginModel.Password, false, false);
 
-                    return Redirect(loginModel.ReturnUrl);
+                    if (result.Succeeded)
+                    {
+                        if (string.IsNullOrEmpty(loginModel.ReturnUrl))
+                        {
+                            return Redirect("/");
+                        }
+
+                        return Redirect(loginModel.ReturnUrl);
+                    }
                 }
             }
+            ModelState.AddModelError("", "invalid login");
 
-            return View();
+            return View(loginModel);
         }
     }
 }
