@@ -57,7 +57,7 @@ namespace WebApp
                 
                 userManager.CreateAsync(user, adminPassword).GetAwaiter().GetResult();
             }
-            
+
             host.Run();
         }
 

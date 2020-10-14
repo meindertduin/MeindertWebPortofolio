@@ -18,27 +18,30 @@
    
 <div class="container-fluid mt-0" id="index-profile">
     <div class="container">
-        <div class="display-4 my-2 section-title">Meindert van Duin</div>
 
         <div class="row">
-            <div class="col-xl-10 offset-xl-1">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="h4 text-muted mt-3 section-subtitle">Hobby programmeur, die er nu echte werk van wilt maken.</div>
-                        <div class="section-text">
-                            <p>Ik ben graag opzoek naar een baan waarbij ik mijn voet in de wereld van fullstack development kan zetten.
-                                Zo programmeer ik al een tijdje in Asp .Net en javascript framework Vue en is het gehele proces van het maken van een website wat mij erg interesseert</p>
-                            <p>Mijn affinieteiten liggen vooral bij het technische aspect van het maken van een website,
-                                maar ik hoop ook graag verder te kunnen ontwikkelen om te kunnen genieten van alle aspecten van fullstack development. </p>
-                            <p>Daarom hoop ik graag aan de slag te kunnen in een team waarbij ontwikkeling en resultaat prioriteit zijn.</p>
-                        </div>
-
-                    </div>
-                    <div class="col-lg-6">
-                        <img src="static/images/stock-profile.jpg" class="img-fluid" alt="5">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="display-3 my-2 section-title">Meindert van Duin</div>
+                                   
+                    <div class="h4 text-muted mt-3 section-subtitle">Hobby programmeur, die er nu echte werk van wilt maken.</div>
+                    <div class="section-text">
+                        <p>Ik ben graag opzoek naar een baan waarbij ik mijn voet in de wereld van fullstack development kan zetten.
+                            Zo programmeer ik al een tijdje in Asp .Net en javascript framework Vue en is het gehele proces van het maken van een website wat mij interesseert</p>
+                        
+                        <p>Mijn affiniteiten liggen vooral bij de het ontwikkelen van de functionaliteit van een website zowel front-end als backend,
+                            maar ik hoop graag op alle aspecten van fullstack te kunnen doorgroeien. Verder heb ik een grote interesse 
+                            naar technologie en is het uitdagende aspect van programmeren wat me erg aanspreekt. Zo houd ik me in mijn vrije tijd
+                            veel bezig met het uitproberen van nieuwe technieken en doe ik ook op mijn beurt mezelf bezig houden met een wat groter project waarbij alle
+                            technieken samen komen.
+                            Ik heb in de tijd dat ik bezig ben met programmeren veel geleerd en is het kunnen doorgroeien in een professionele  omgeving
+                            de volgende logische stap voor mij.</p>
+                        
+                        <p>Daarom hoop ik graag aan de slag te kunnen in een team waarbij ontwikkeling en resultaat belangrijk zijn.</p>
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
        
@@ -166,9 +169,10 @@
         <div class="row mb-3">
             <div class="col-8">
                 <div class="div">
-                    Naast projecten die ik uitvoer zijn er ook veel github repositories die ik aanmaak voor het doen van oefen projectjes. Deze 
-                    kleine projecten bestaan uit een onderwerp die ik graag wil leren zoals bijvoorbeeld een ontwerp patroon en die ik dan uitvoer.
-                    Elk van deze projecten hebben als je erop klikt een korte beschrijving van wat de bedoeling is en een link naar een github repository.
+                    Naast projecten die ik uitvoer zijn er ook veel github repositories die ik aanmaak voor het doen van oefen projectjes waarbij vaak een techniek centraal staat.
+                    Dit kan bijvoorbeeld een onderwerp zijn waarmee ik aan de slag ga met bijvoorbeeld het uitproberen van een nieuw framework of een wat concreter voorbeeld:
+                    het maken van een live chat applicatie met websockets. Deze projecten zijn vooral bedoel zodat ik inzicht krijg in deze technieken en ik ze altijd als referentie kan gebruiken.
+                    Maar ik hoop ook hiermee te kunnen laten hoe ik codeer en waarmee ik me bezighoud.
                 </div>
             </div>
             
@@ -187,24 +191,31 @@
                 </div>
             </div>
                 
-            <div class="m-2 exercise-project-menu-item">
-                <div class="dropdown show">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item"><a class="exercise-page-link" href="#">Vorige</a></li>
-                            @for (int x = 0; x < ViewBag.PagesCount; x++)
-                            {
+            @if (ViewBag.Pages > 1)
+            {
+                <div class="m-2 exercise-project-menu-item">
+                    <div class="dropdown show">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
                                 <li class="page-item">
-                                    <a class="exercise-page-link" asp-action="Index" asp-route-sortOrder="@ViewBag.SortParam" asp-route-index="@x" >@(x + 1)</a>
-                                </li>    
-                            }
-                            <li class="page-item"><a class="exercise-page-link" href="#">Volgende</a></li>
-        
-                        </ul>
-                    </nav>
+                                    <a class="exercise-page-link" href="#">Vorige</a>
+                                </li>
+                                @for (int x = 0; x < ViewBag.PagesCount; x++)
+                                {
+                                    <li class="page-item">
+                                        <a class="exercise-page-link" asp-action="Index" asp-route-sortOrder="@ViewBag.SortParam" asp-route-index="@x" >@(x + 1)</a>
+                                    </li>    
+                                }
+                                <li class="page-item">
+                                    <a class="exercise-page-link" href="#">Volgende</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
+            }
             </div>
-        </div>
+
         <div id="accordion" class="exercise-project-container">
             @foreach (var project in ViewBag.Projects)
             {

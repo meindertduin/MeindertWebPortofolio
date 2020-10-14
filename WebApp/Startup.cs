@@ -32,7 +32,15 @@ namespace WebApp
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var conn = Configuration["Projects:ConnectionString"]?? Configuration.GetConnectionString("AppContext");
+            string conn = String.Empty;
+            if (_env.IsDevelopment())
+            {
+                conn = Configuration["Projects:ConnectionString"]?? Configuration.GetConnectionString("AppContext");
+            }
+            else
+            {
+                conn = Configuration["ServerConnectionString"];
+            }
             
             services.AddDbContext<AppDbContext>(builder =>
             {
