@@ -7,6 +7,8 @@ services:
       - VIRTUAL_HOST=www.meindertvanduin.nl
       - LETSENCRYPT_HOST=www.meindertvanduin.nl
       - LETSENCRYPT_EMAIL=meindertvanduin99@gmail.com
+      - ServerConnectionString=${ServerConnectionString}
+      - AdminPassword=${AdminPassword}
 networks:
   default:
     external: 
