@@ -26,8 +26,8 @@ namespace WebApp.Controllers
         private readonly IImageProcessingService _imageProcessingService;
         private const int ITEMS_PER_PAGE = 10;
 
-        private const int BIG_PROJECT_IMAGE_WIDTH = 1280;
-        private const int BIG_PROJECT_IMAGE_HEIGHT = 720;
+        private const int BIG_PROJECT_IMAGE_WIDTH = 1920;
+        private const int BIG_PROJECT_IMAGE_HEIGHT = 1080;
         
         public AdminController(AppDbContext ctx, IWebHostEnvironment env, IImageProcessingService imageProcessingService)
         {
