@@ -1,0 +1,13 @@
+﻿version: '3'
+
+services:
+  webportofolioapp:
+    image: meindertvanduin/portofolioapp:latest
+    environment:
+      - VIRTUAL_HOST=www.meindertvanduin.nl
+      - LETSENCRYPT_HOST=www.meindertvanduin.nl
+      - LETSENCRYPT_EMAIL=meindertvanduin99@gmail.com
+networks:
+  default:
+    external: 
+      name: webproxy
